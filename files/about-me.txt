@@ -1,0 +1,5 @@
+I'm Anshuman Mohanty, a deeply curious Data Scientist with a Master's in Applied Data Science from USC. I specialize in transforming complex raw data into real-world solutions using Deep Learning, Generative AI, NLP, and forecasting.
+
+My approach balances advanced research with pragmatic application. I have authored two published papers in the domain of Sales Forecasting and Object Detection and delivered measurable professional impact.
+
+With experience ranging from deep learning research to deploying scalable pipelines on AWS at organizations like Klickly and Dr. Reddy's, I am a collaborative problem-solver ready to build the next generation of AI-powered solutions.

@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anshuman Mohanty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #121826;
+            --accent-cyan: #00d9ff;
+            --accent-purple: #b366ff;
+            --accent-pink: #ff3366;
+            --text-primary: #ffffff;
+            --text-secondary: #ffffff;
+            --grid-color: rgba(0, 217, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Grid */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Data Flow Network Animation */
+        .data-network {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Particle Container */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            background: rgba(10, 14, 23, 0.0);
+            backdrop-filter: blur(2px);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.05);
+            z-index: 100;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--accent-cyan);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            max-width: 900px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .label {
+            font-size: 1.25rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: glow 2s ease-in-out infinite;
+            font-weight: 700;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+            }
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1.2s ease-out 0.2s both;
+        }
+
+        .tagline {
+            font-size: clamp(1.125rem, 3vw, 1.75rem);
+            color: var(--text-primary);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            line-height: 1.8;
+            animation: fadeInUp 1.2s ease-out 0.4s both;
+            letter-spacing: 0.3px;
+            position: relative;
+            height: 2.5rem;
+            overflow: hidden;
+        }
+
+        .tagline-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .tagline span {
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
+
+        /* CTA Buttons */
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.2s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .scroll-indicator.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            display: block;
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(to bottom, var(--accent-cyan), transparent);
+            margin: 0 auto 0.5rem;
+        }
+
+        .scroll-text {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator:hover {
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: rgba(18, 24, 38, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 5rem 2rem;
+                gap: 2rem;
+                border-left: 1px solid rgba(0, 217, 255, 0.2);
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-link {
+                font-size: 1.1rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* About Section */
+        .about-section {
+            min-height: 100vh;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+        }
+
+        /* Dynamic Background for About Section */
+        .about-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .data-nodes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+
+        .data-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-cyan);
+            animation: nodeFloat 15s linear infinite;
+        }
+
+        .data-node:nth-child(3n+1) {
+            background: var(--accent-purple);
+            box-shadow: 0 0 10px var(--accent-purple);
+            animation-duration: 20s;
+        }
+
+        .data-node:nth-child(3n+2) {
+            background: var(--accent-pink);
+            box-shadow: 0 0 10px var(--accent-pink);
+            animation-duration: 25s;
+        }
+
+        @keyframes nodeFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .wave-pattern {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0, 217, 255, 0.05), transparent);
+            animation: wave 10s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: scaleY(1);
+            }
+            50% {
+                transform: scaleY(1.2);
+            }
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 217, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 217, 255, 0.05) 1px, transparent 1px);
+            background-size: 100px 100px;
+            animation: gridMove 30s linear infinite;
+            z-index: 2;
+        }
+
+        /* Enhanced About Section Container */
+        .about-section .container {
+            max-width: 1200px;
+            padding: 0 4rem;
+            position: relative;
+            z-index: 3;
+            animation: fadeInUp 1.2s ease-out;
+            margin: 0 auto;
+        }
+
+        /* Cyberpunk Grid Overlay for About Section */
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.3;
+            z-index: 0;
+            pointer-events: none;
+            animation: gridMove 20s linear infinite;
+        }
+
+        .about-section .container {
+            max-width: 1200px;
+            padding: 0 4rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1.2s ease-out;
+            margin: 0 auto;
+        }
+
+        /* Ensure About section content doesn't overlap with other sections */
+        .about-section .about-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+            opacity: 0.5;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+            animation: neonGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(179, 102, 255, 0.5), 0 0 40px rgba(0, 217, 255, 0.3);
+            }
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .about-text {
+            line-height: 1.8;
+            color: #ffffff !important;
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 217, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        /* Force all text within about section to be white */
+        .about-section * {
+            color: #ffffff !important;
+        }
+        
+        /* Override any potential text color issues */
+        .about-text * {
+            color: #ffffff !important;
+        }
+
+        .about-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transition: left 0.5s ease;
+        }
+
+        .about-text:hover {
+            border-color: rgba(0, 217, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(0, 217, 255, 0.1), 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .about-text:hover::before {
+            left: 0;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #ffffff !important;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Interactive elements */
+        .highlight {
+            background: linear-gradient(120deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .highlight:hover::after {
+            opacity: 1;
+        }
+
+        /* Terminal-style typing effect for key phrases */
+        .typing-effect {
+            display: inline-block;
+            border-right: 2px solid var(--accent-cyan);
+            animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--accent-cyan); }
+        }
+
+        /* Skill badges */
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 217, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+        }
+
+        /* Terminal Cursor Effect */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: var(--accent-cyan);
+            margin-left: 5px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            50.01%, 100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-background"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">AM</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About Me</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#playground" class="nav-link">Playground</a></li>
+                <li><a href="#case-studies" class="nav-link">Case Studies</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span>
+                <span>
+                <span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <div class="label">Associate @ PwC</div>
+            <h1>Anshuman Mohanty</h1>
+            <div class="tagline">
+                <div class="tagline-text" id="taglineText">I turn complex data into actionable insights</div>
+            </div>
+            <div class="cta-group">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Me Section -->
+    <section id="about" class="about-section">
+        <div class="about-background">
+            <div class="data-nodes" id="dataNodes"></div>
+            <div class="wave-pattern"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="section-header">
+                <div class="label">About Me</div>
+                <h2 class="section-title">Who I Am</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text" id="aboutText">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-text">Scroll</div>
+    </div>
+
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            
+            // Random color
+            const colors = ['var(--accent-cyan)', 'var(--accent-purple)', 'var(--accent-pink)'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            particlesContainer.appendChild(particle);
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Active link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', () => {
+            let current = 'home';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+
+        // Change navbar background on scroll
+        if (scrollY > 50) {
+            // Scrolled down - make translucent
+            navbar.style.background = 'rgba(10, 14, 23, 0.85)';
+            navbar.style.backdropFilter = 'blur(2px)';
+            navbar.style.borderBottom = '1px solid rgba(0, 217, 255, 0.3)';
+        } else {
+            // At top - keep completely transparent
+            navbar.style.background = 'rgba(10, 14, 23, 0.0)';
+            navbar.style.backdropFilter = 'blur(2px)';
+            navbar.style.borderBottom = '1px solid rgba(0, 217, 255, 0.05)';
+        }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll to top functionality
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+
+        // Show/hide scroll indicator based on scroll position
+        window.addEventListener('scroll', () => {
+            if (scrollY > 300) {
+                scrollIndicator.classList.add('visible');
+            } else {
+                scrollIndicator.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top when clicking the indicator
+        scrollIndicator.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add interactivity to buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function(e) {
+                const x = e.pageX - this.offsetLeft;
+                const y = e.pageY - this.offsetTop;
+                
+                const ripple = document.createElement('span');
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.3);
+                    transform: translate(-50%, -50%);
+                    left: ${x}px;
+                    top: ${y}px;
+                    animation: ripple 0.6s ease-out;
+                `;
+                
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+
+        // Create floating data points animation
+        function createFloatingDataPoints() {
+            const container = document.createElement('div');
+            container.id = 'dataPointsContainer';
+            container.style.position = 'fixed';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100vw';
+            container.style.height = '100vh';
+            container.style.zIndex = '1';
+            container.style.pointerEvents = 'none';
+            container.style.opacity = '0.2';
+            document.body.appendChild(container);
+
+            const colors = ['#00d9ff', '#b366ff', '#ff3366'];
+            
+            function createDataPoint() {
+                const point = document.createElement('div');
+                point.style.position = 'absolute';
+                point.style.width = Math.random() * 3 + 2 + 'px';
+                point.style.height = point.style.width;
+                point.style.background = colors[Math.floor(Math.random() * colors.length)];
+                point.style.borderRadius = '50%';
+                point.style.boxShadow = '0 0 10px currentColor';
+                point.style.left = Math.random() * 100 + '%';
+                point.style.top = Math.random() * 100 + '%';
+                point.style.animation = `floatUp ${Math.random() * 10 + 15}s linear infinite`;
+                
+                container.appendChild(point);
+
+                // Remove after animation
+                setTimeout(() => {
+                    if (point.parentNode) {
+                        point.parentNode.removeChild(point);
+                    }
+                }, 15000);
+            }
+
+            // Add CSS for floating animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes floatUp {
+                    from {
+                        transform: translateY(100vh) rotate(0deg);
+                        opacity: 0;
+                    }
+                    10% {
+                        opacity: 1;
+                    }
+                    90% {
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateY(-100px) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Create new data points periodically
+            setInterval(createDataPoint, 500);
+            
+            // Initial burst of data points
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createDataPoint, i * 100);
+            }
+        }
+
+        // Create data stream lines
+        function createDataStreamLines() {
+            const container = document.createElement('div');
+            container.id = 'dataStreamContainer';
+            container.style.position = 'fixed';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100vw';
+            container.style.height = '100vh';
+            container.style.zIndex = '0';
+            container.style.pointerEvents = 'none';
+            container.style.opacity = '0.1';
+            document.body.appendChild(container);
+
+            function createDataStream() {
+                const stream = document.createElement('div');
+                stream.style.position = 'absolute';
+                stream.style.height = '2px';
+                stream.style.background = 'linear-gradient(90deg, transparent, #00d9ff, transparent)';
+                stream.style.left = Math.random() * 100 + '%';
+                stream.style.top = Math.random() * 100 + '%';
+                stream.style.width = Math.random() * 200 + 100 + 'px';
+                stream.style.transform = `rotate(${Math.random() * 360}deg)`;
+                stream.style.animation = `streamFlow ${Math.random() * 5 + 5}s linear infinite`;
+                
+                container.appendChild(stream);
+
+                // Remove after animation
+                setTimeout(() => {
+                    if (stream.parentNode) {
+                        stream.parentNode.removeChild(stream);
+                    }
+                }, 5000);
+            }
+
+            // Add CSS for stream animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes streamFlow {
+                    from {
+                        transform: translateX(-100px) rotate(${Math.random() * 360}deg);
+                        opacity: 0;
+                    }
+                    50% {
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateX(100vw) rotate(${Math.random() * 360}deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Create new streams periodically
+            setInterval(createDataStream, 1000);
+        }
+
+        // Initialize all animations
+        createFloatingDataPoints();
+        createDataStreamLines();
+        createDataNetwork();
+
+        // Create Data Flow Network Animation
+        function createDataNetwork() {
+            const canvas = document.createElement('canvas');
+            canvas.id = 'dataNetworkCanvas';
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100vw';
+            canvas.style.height = '100vh';
+            canvas.style.zIndex = '1';
+            canvas.style.pointerEvents = 'none';
+            canvas.style.opacity = '0.6';
+            document.body.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            
+            // Resize canvas to match window
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Network configuration
+            const config = {
+                nodeCount: Math.floor((canvas.width * canvas.height) / 20000),
+                maxConnections: 3,
+                maxDistance: 150,
+                nodeSize: 3,
+                lineWidth: 1,
+                colors: ['#00d9ff', '#b366ff', '#ff3366']
+            };
+
+            // Node class
+            class Node {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.color = config.colors[Math.floor(Math.random() * config.colors.length)];
+                    this.pulse = Math.random() * Math.PI;
+                }
+
+                update() {
+                    // Move nodes
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    // Bounce off walls
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                    // Pulse animation
+                    this.pulse += 0.05;
+                }
+
+                draw() {
+                    const pulseSize = Math.sin(this.pulse) * 1.5 + config.nodeSize;
+                    
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, pulseSize, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            // Create nodes
+            const nodes = [];
+            for (let i = 0; i < config.nodeCount; i++) {
+                nodes.push(new Node());
+            }
+
+            // Mouse interaction
+            const mouse = {
+                x: undefined,
+                y: undefined,
+                radius: 150
+            };
+
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.x;
+                mouse.y = e.y;
+            });
+
+            window.addEventListener('mouseout', () => {
+                mouse.x = undefined;
+                mouse.y = undefined;
+            });
+
+            // Draw function
+            function draw() {
+                // Clear canvas with trail effect
+                ctx.fillStyle = 'rgba(10, 14, 23, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Update and draw nodes
+                nodes.forEach(node => {
+                    node.update();
+                    node.draw();
+
+                    // Check connections to other nodes
+                    nodes.forEach(otherNode => {
+                        if (node === otherNode) return;
+
+                        const distance = Math.hypot(node.x - otherNode.x, node.y - otherNode.y);
+                        
+                        if (distance < config.maxDistance) {
+                            // Draw connection line
+                            ctx.beginPath();
+                            ctx.strokeStyle = node.color;
+                            ctx.lineWidth = config.lineWidth;
+                            ctx.globalAlpha = 1 - (distance / config.maxDistance);
+                            ctx.moveTo(node.x, node.y);
+                            ctx.lineTo(otherNode.x, otherNode.y);
+                            ctx.stroke();
+                            ctx.globalAlpha = 1;
+
+                            // Add flow animation
+                            if (Math.random() < 0.02) {
+                                const flowX = node.x + (otherNode.x - node.x) * Math.random();
+                                const flowY = node.y + (otherNode.y - node.y) * Math.random();
+                                
+                                ctx.beginPath();
+                                ctx.arc(flowX, flowY, 1, 0, Math.PI * 2);
+                                ctx.fillStyle = '#ffffff';
+                                ctx.fill();
+                            }
+                        }
+                    });
+
+                    // Mouse interaction
+                    if (mouse.x && mouse.y) {
+                        const distance = Math.hypot(node.x - mouse.x, node.y - mouse.y);
+                        if (distance < mouse.radius) {
+                            // Repel nodes from mouse
+                            const angle = Math.atan2(node.y - mouse.y, node.x - mouse.x);
+                            const force = (mouse.radius - distance) / 10;
+                            node.vx += Math.cos(angle) * force * 0.1;
+                            node.vy += Math.sin(angle) * force * 0.1;
+                            
+                            // Highlight nodes near mouse
+                            ctx.beginPath();
+                            ctx.arc(node.x, node.y, config.nodeSize + 2, 0, Math.PI * 2);
+                            ctx.strokeStyle = '#ffffff';
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+                });
+            }
+
+            // Animation loop
+            function animate() {
+                draw();
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+
+        // Create dynamic data nodes for About section background
+        const dataNodesContainer = document.getElementById('dataNodes');
+        const nodeCount = 50;
+
+        for (let i = 0; i < nodeCount; i++) {
+            const node = document.createElement('div');
+            node.className = 'data-node';
+            node.style.left = Math.random() * 100 + '%';
+            node.style.top = Math.random() * 100 + '%';
+            node.style.animationDelay = Math.random() * 15 + 's';
+            node.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            
+            // Random size variation
+            const size = Math.random() * 3 + 2;
+            node.style.width = size + 'px';
+            node.style.height = size + 'px';
+            
+            dataNodesContainer.appendChild(node);
+        }
+
+        // Load About Me content from text file
+        async function loadAboutContent() {
+            try {
+                const response = await fetch('files/about-me.txt');
+                if (!response.ok) {
+                    throw new Error('Failed to load about content');
+                }
+                const text = await response.text();
+                
+                // Split text into paragraphs and create HTML
+                const paragraphs = text.split('\n\n').filter(p => p.trim());
+                const aboutTextContainer = document.getElementById('aboutText');
+                
+                aboutTextContainer.innerHTML = paragraphs.map(paragraph => {
+                    // Add highlights for key terms
+                    const highlightedText = paragraph
+                        .replace(/Data Scientist/g, 'Data Scientist')
+                        .replace(/Deep Learning/g, 'Deep Learning')
+                        .replace(/Generative AI/g, 'Generative AI')
+                        .replace(/NLP/g, 'NLP')
+                        .replace(/forecasting/g, 'forecasting')
+                        .replace(/95% accuracy/g, '95% accuracy')
+                        .replace(/13%/g, '13%')
+                        .replace(/AWS/g, 'AWS')
+                        .replace(/AI-powered solutions/g, 'AI-powered solutions');
+                    
+                    return `<p>${highlightedText}</p>`;
+                }).join('');
+                
+            } catch (error) {
+                console.error('Error loading about content:', error);
+                // Fallback content
+                document.getElementById('aboutText').innerHTML = `
+                    <p>I'm Anshuman Mohanty, a deeply curious Data Scientist with a Master's in Applied Data Science from USC. I specialize in transforming complex raw data into real-world solutions using Deep Learning, Generative AI, NLP, and forecasting.</p>
+                    <p>My approach balances advanced research with pragmatic application. I have authored two published papers and delivered measurable professional impact, including achieving 95% accuracy in Alzheimer's detection models and engineering reinforcement learning algorithms that increased ad CTR by 13%.</p>
+                    <p>With experience ranging from deep learning research to deploying scalable pipelines on AWS at organizations like Klickly and Dr. Reddy's, I am a collaborative problem-solver ready to build the next generation of AI-powered solutions. I am currently seeking full-time opportunities in Data Science and AI/ML.</p>
+                `;
+            }
+        }
+
+        // Load content when page loads
+        window.addEventListener('DOMContentLoaded', loadAboutContent);
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    width: 300px;
+                    height: 300px;
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Typewriter effect for tagline
+        const taglineText = document.getElementById('taglineText');
+        const taglines = [
+            'I turn complex data into actionable insights',
+            'I build AI solutions that drive business impact',
+            'I transform raw data into strategic intelligence',
+            'I create data-driven solutions for real-world problems',
+            'I engineer machine learning systems that scale'
+        ];
+        
+        let currentIndex = 0;
+        let isTyping = false;
+        
+        function typeWriter() {
+            if (isTyping) return;
+            
+            isTyping = true;
+            const currentTagline = taglines[currentIndex];
+            let charIndex = 0;
+            taglineText.textContent = '';
+            
+            const typeInterval = setInterval(() => {
+                if (charIndex < currentTagline.length) {
+                    taglineText.textContent += currentTagline.charAt(charIndex);
+                    charIndex++;
+                } else {
+                    clearInterval(typeInterval);
+                    
+                    // Pause before clearing for next sentence
+                    setTimeout(() => {
+                        // Clear text with fade out effect
+                        taglineText.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            // Move to next tagline
+                            currentIndex = (currentIndex + 1) % taglines.length;
+                            
+                            // Reset and prepare for next typing
+                            taglineText.style.opacity = '1';
+                            isTyping = false;
+                            typeWriter(); // Start typing the next sentence
+                        }, 1000); // 1 second pause before next sentence
+                    }, 3000); // Display current sentence for 3 seconds
+                }
+            }, 100); // Type each character every 100ms
+        }
+
+        // Start typewriter effect after initial load
+        setTimeout(() => {
+            typeWriter();
+        }, 2000); // Wait 2 seconds before starting
+    </script>
+</body>
+</html>
