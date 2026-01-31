@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-primary: #0a0e17;
@@ -447,10 +452,22 @@
                 width: 100%;
                 max-width: 300px;
             }
+
+                       .project-header {
+                flex-direction: column;
+            }
+
+            .project-title {
+                font-size: 1.2rem;
+            }
+
+            .about-section .container, .skills-section .container, .projects-section .container, .publications-section .container {
+                padding: 0 2rem;
+            }
         }
 
-        /* About Section */
-        .about-section {
+        /* About Section, Projects section, Publication section */
+        .about-section, .projects-section, .publications-section {
             min-height: 100vh;
             padding: 6rem 2rem;
             position: relative;
@@ -460,8 +477,8 @@
             margin-left: calc(-50vw + 50%);
         }
 
-        /* Dynamic Background for About Section */
-        .about-background {
+        /* Dynamic Background for About Section, Projects section, Publication section  */
+        .about-background, .projects-background, .publications-background {
             position: absolute;
             top: 0;
             left: 0;
@@ -469,6 +486,28 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
+        }
+
+                /* This targets the anchor tag wrapping the card */
+        .card-link-wrapper {
+            text-decoration: none; /* Removes the default underline from links */
+            color: inherit;        /* Ensures text color stays as defined in your publication-item styles */
+            display: block;        /* Makes the link behave like a block element to cover the whole card area */
+            cursor: pointer;       /* Ensures the mouse turns into a hand icon */
+        }
+
+        /* This ensures the transition happens smoothly both ON and OFF hover */
+        .publication-item, .project-item {
+            /* Assuming you already have base styles for background and border here */
+            /* e.g., background: var(--bg-secondary); border: 1px solid var(--grid-color); */
+            transition: all 0.3s ease;
+        }
+
+        /* The actual hover effect matching your site style */
+        .card-link-wrapper:hover .publication-item, .project-item {
+            border-color: var(--accent-cyan); /* Change border to neon cyan */
+            transform: translateY(-5px); /* Move the card up slightly */
+            box-shadow: 0 5px 15px rgba(0, 217, 255, 0.1); /* Add a cyan glow effect */
         }
 
         .data-nodes {
@@ -553,8 +592,8 @@
             z-index: 2;
         }
 
-        /* Enhanced About Section Container */
-        .about-section .container {
+        /* Enhanced About, Projects, Publications Section Container */
+        .about-section .container, .projects-section .container, .publications-section .container  {
             max-width: 1200px;
             padding: 0 4rem;
             position: relative;
@@ -563,8 +602,8 @@
             margin: 0 auto;
         }
 
-        /* Cyberpunk Grid Overlay for About Section */
-        .about-section::before {
+        /* Cyberpunk Grid Overlay for About, Projects, Publications Section */
+        .about-section::before, .projects-section::before, .publications-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -932,6 +971,222 @@
                 padding: 1.5rem;
             }
         }
+
+               /* Projects Section Styles */
+        .project-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 217, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transition: left 0.5s ease;
+        }
+
+        .project-item:hover {
+            border-color: rgba(0, 217, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(0, 217, 255, 0.1), 0 0 20px rgba(0, 217, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .project-item:hover::before {
+            left: 0;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-title-wrapper {
+            flex: 1;
+        }
+
+        .project-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.3rem 1rem;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+        }
+
+        .project-link:hover {
+            background: rgba(0, 217, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #8b95a8;
+            margin-bottom: 1rem;
+        }
+
+        .project-date {
+            color: var(--accent-purple);
+            font-weight: 600;
+        }
+
+        .project-tech {
+            color: var(--accent-cyan);
+        }
+
+        .project-description {
+            margin-bottom: 1rem;
+        }
+
+        .project-description ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-description li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .project-description li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .project-description strong {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        /* Publications Section Styles */
+        .publication-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 217, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .publication-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+            transition: left 0.5s ease;
+        }
+
+        .publication-item:hover {
+            border-color: rgba(179, 102, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(179, 102, 255, 0.1), 0 0 20px rgba(179, 102, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .publication-item:hover::before {
+            left: 0;
+        }
+
+        .publication-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .publication-link {
+            display: inline-block;
+            color: var(--accent-purple);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.3rem 1rem;
+            border: 1px solid var(--accent-purple);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+        }
+
+        .publication-link:hover {
+            background: rgba(179, 102, 255, 0.1);
+            box-shadow: 0 0 15px rgba(179, 102, 255, 0.3);
+        }
+
+        .publication-description ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .publication-description li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .publication-description li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .publication-description strong {
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -947,7 +1202,7 @@
                 <li><a href="#about" class="nav-link">About Me</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#case-studies" class="nav-link">Case Studies</a></li>
+                <li><a href="#publications" class="nav-link">Publications</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="menu-toggle" id="menuToggle">
@@ -1058,6 +1313,136 @@
         </div>
     </section>
 
+    <section id="projects" class="projects-section">
+        <div class="projects-background">
+            <div class="data-nodes" id="projectsDataNodes"></div>
+            <div class="wave-pattern"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="section-header">
+                <div class="label">Projects</div>
+                <h2 class="section-title">What I Built</h2>
+            </div>
+            <div class="projects-content">
+                <a href="https://github.com/AnshumanMohanty-2001/EchoFilter-AI-Powered-Personal-Audio-Firewall" class="card-link-wrapper" target="_blank">
+                <div class="project-item">
+                    <div class="project-header">
+                        <div class="project-title-wrapper">
+                            <h3 class="project-title">EchoFilter: AI-Powered Personal Audio Firewall</h3>                        </div>
+                        <div class="project-meta">
+                            <span class="project-tech">Python</span>
+                            <span class="project-date">Apr 2025 – May 2025</span>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <ul>
+                            <li>Designed and implemented <strong>EchoFilter</strong>, a modular system that <strong>transcribes ambient audio</strong> using <strong>Faster-Whisper ASR</strong> and <strong>detects, explains, and redacts sensitive content</strong> (e.g., mental health, bullying) from transcripts.</li>
+                            <li>Developed NLP pipeline <strong>combining semantic and contextual understanding</strong> for category classification using <strong>MPNet Sentence Transformers</strong>, severity assessment via <strong>Flan-T5</strong>, and rationale generation using <strong>Phi-2</strong>; deployed system with <strong>Streamlit Cloud</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+                </a>
+
+                <a href="https://github.com/AnshumanMohanty-2001/Detect-AI-Text-using-LLMs" class="card-link-wrapper" target="_blank">
+                <div class="project-item">
+                    <div class="project-header">
+                        <div class="project-title-wrapper">
+                            <h3 class="project-title">Classifying Human vs. LLM-Generated Text Using Transformer Models</h3>                        </div>
+                        <div class="project-meta">
+                            <span class="project-tech">Python</span>
+                            <span class="project-date">Mar 2025 – Apr 2025</span>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <ul>
+                            <li>Developed an advanced <strong>NLP preprocessing pipeline</strong> (processing <strong>missing data, unicode normalization, contraction expansion, stop word removal, lemmatization</strong>) for classifying <strong>30,000 essays</strong>.</li>
+                            <li>Engineered and evaluated multiple models, achieving a state-of-the-art accuracy of <strong>99.82%</strong> with <strong>DistilBERT</strong>, significantly outperforming traditional ML and other DL approaches.</li>
+                        </ul>
+                    </div>
+                </div>
+                </a>
+
+                <a href="https://github.com/AnshumanMohanty-2001/Yelp-Recommender-System" class="card-link-wrapper" target="_blank">
+                <div class="project-item">
+                    <div class="project-header">
+                        <div class="project-title-wrapper">
+                            <h3 class="project-title">XGBoost-based Recommendation System for Yelp Reviews</h3>
+                        </div>
+                        <div class="project-meta">
+                            <span class="project-tech">Python</span>
+                            <span class="project-date">Aug 2024 – Dec 2024</span>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <ul>
+                            <li>Built a robust recommender system using <strong>XGBoost on PySpark</strong> for <strong>large dataset (450,000 records)</strong>, incorporating sophisticated feature engineering techniques.</li>
+                            <li>Optimized model performance via <strong>hyperparameter tuning (Optuna)</strong>, achieved <strong>test RMSE of 97.35</strong> and <strong>ranked 5th among 250 students</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+                </a>
+
+                <a href="https://github.com/AnshumanMohanty-2001/Hotel-Reservation-Manager" class="card-link-wrapper" target="_blank">
+                <div class="project-item">
+                    <div class="project-header">
+                        <div class="project-title-wrapper">
+                            <h3 class="project-title">Leveraging Database Solutions for Hotel Management</h3>                        </div>
+                        <div class="project-meta">
+                            <span class="project-tech">Python, MongoDB</span>
+                            <span class="project-date">Jan 2024 – May 2024</span>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <ul>
+                            <li>Developed a <strong>full-stack Flask web application</strong> to streamline <strong>hotel booking and management operations</strong>.</li>
+                            <li>Optimized database performance for <strong>80,000 records</strong> using <strong>hashing</strong> and ensured <strong>high availability</strong> through the implementation of <strong>3 replica sets in MongoDB</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="publications-section">
+        <div class="publications-background">
+            <div class="data-nodes" id="publicationsDataNodes"></div>
+            <div class="wave-pattern"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="section-header">
+                <div class="label">Publications</div>
+                <h2 class="section-title">What I Published</h2>
+            </div>
+            <div class="publications-content">
+                <a href="https://www.researchgate.net/publication/376475914_Zero-DCE_Inspired_Object_Detection_in_Less_Illuminated_Environment_Using_Improved_YOLOv5/" class="card-link-wrapper" target="_blank">
+                    <div class="publication-item">
+                        <h3 class="publication-title">Zero-DCE++ Inspired Object Detection in Less Illuminated Environment Using Improved YOLOv5</h3>
+                        <div class="publication-description">
+                            <ul>
+                                <li>Enhanced poorly-lit images with Zero-DCE++; optimized YOLOv5 for improved night-time road object detection.</li>
+                                <li>Obtained <strong>mAP score 5.3% higher</strong> with <strong>0.9 million parameters fewer</strong> than baseline YOLOv5s thus leading to both accurate results and faster predictions time; presented results to industry experts for evaluation.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.sciencedirect.com/science/article/abs/pii/S0045790622005754" class="card-link-wrapper" target="_blank">
+                <div class="publication-item">
+                    <h3 class="publication-title">A Hybrid Deep Learning Framework with CNN and Bi-directional LSTM for Store Item Demand Forecasting</h3>
+                    <div class="publication-description">
+                        <ul>
+                            <li>Devised <strong>CNN-BiLSTM</strong> framework for time series sales prediction across 50 products and 10 stores.</li>
+                            <li>Obtained <strong>Mean Absolute Error</strong> of <strong>6.7</strong>, <strong>R2 Score of 0.85</strong>, <strong>outperformed</strong> all existing research approaches.</li>
+                        </ul>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Scroll Indicator -->
     <div class="scroll-indicator">
