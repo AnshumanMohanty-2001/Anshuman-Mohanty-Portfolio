@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ========================================
+           CSS VARIABLES
+        ======================================== */
         :root {
             --bg-primary: #0a0e17;
             --bg-secondary: #121826;
@@ -24,6 +23,9 @@
             --grid-color: rgba(0, 217, 255, 0.1);
         }
 
+        /* ========================================
+           GLOBAL RESET & BASE STYLES
+        ======================================== */
         * {
             margin: 0;
             padding: 0;
@@ -38,7 +40,9 @@
             position: relative;
         }
 
-        /* Animated Background Grid */
+        /* ========================================
+           BACKGROUND ANIMATIONS
+        ======================================== */
         .grid-background {
             position: fixed;
             top: 0;
@@ -58,7 +62,6 @@
             100% { transform: translate(50px, 50px); }
         }
 
-        /* Data Flow Network Animation */
         .data-network {
             position: fixed;
             top: 0;
@@ -69,7 +72,6 @@
             pointer-events: none;
         }
 
-        /* Particle Container */
         .particles {
             position: fixed;
             top: 0;
@@ -107,7 +109,9 @@
             }
         }
 
-        /* Main Container */
+        /* ========================================
+           MAIN CONTAINER
+        ======================================== */
         .container {
             position: relative;
             z-index: 2;
@@ -119,7 +123,9 @@
             padding: 2rem;
         }
 
-        /* Navigation Bar */
+        /* ========================================
+           NAVIGATION BAR
+        ======================================== */
         .navbar {
             position: fixed;
             top: 0;
@@ -206,7 +212,6 @@
             width: 100%;
         }
 
-        /* Mobile Menu Toggle */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -234,7 +239,9 @@
             transform: rotate(-45deg) translate(7px, -7px);
         }
 
-        /* Hero Section */
+        /* ========================================
+           HERO SECTION
+        ======================================== */
         .hero {
             text-align: center;
             max-width: 900px;
@@ -311,7 +318,9 @@
             font-weight: 700;
         }
 
-        /* CTA Buttons */
+        /* ========================================
+           CTA BUTTONS
+        ======================================== */
         .cta-group {
             display: flex;
             gap: 1.5rem;
@@ -360,16 +369,15 @@
             box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
         }
 
-
-        /* Scroll Indicator */
+        /* ========================================
+           SCROLL INDICATOR
+        ======================================== */
         .scroll-indicator {
             position: fixed;
             bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 3rem;
             z-index: 10;
             animation: bounce 2s infinite;
-            cursor: pointer;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -382,10 +390,10 @@
 
         @keyframes bounce {
             0%, 100% {
-                transform: translateX(-50%) translateY(0);
+                transform: translateY(0);
             }
             50% {
-                transform: translateX(-50%) translateY(10px);
+                transform: translateY(10px);
             }
         }
 
@@ -406,68 +414,17 @@
         }
 
         .scroll-indicator:hover {
-            transform: translateX(-50%) translateY(-5px);
+            transform: translateY(-5px);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem 1.5rem;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                height: 100vh;
-                width: 70%;
-                max-width: 300px;
-                background: rgba(18, 24, 38, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 5rem 2rem;
-                gap: 2rem;
-                border-left: 1px solid rgba(0, 217, 255, 0.2);
-                transition: right 0.3s ease;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-link {
-                font-size: 1.1rem;
-            }
-
-            .cta-group {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-
-                       .project-header {
-                flex-direction: column;
-            }
-
-            .project-title {
-                font-size: 1.2rem;
-            }
-
-            .about-section .container, .skills-section .container, .projects-section .container, .publications-section .container {
-                padding: 0 2rem;
-            }
-        }
-
-        /* About Section, Projects section, Publication section */
-        .about-section, .projects-section, .publications-section {
+        /* ========================================
+           SECTION SHARED STYLES
+        ======================================== */
+        .about-section, 
+        .skills-section, 
+        .projects-section, 
+        .publications-section,
+        .contact-section {
             min-height: 100vh;
             padding: 6rem 2rem;
             position: relative;
@@ -477,8 +434,10 @@
             margin-left: calc(-50vw + 50%);
         }
 
-        /* Dynamic Background for About Section, Projects section, Publication section  */
-        .about-background, .projects-background, .publications-background {
+        .about-background, 
+        .projects-background, 
+        .publications-background,
+        .contact-background {
             position: absolute;
             top: 0;
             left: 0;
@@ -488,26 +447,38 @@
             pointer-events: none;
         }
 
-                /* This targets the anchor tag wrapping the card */
-        .card-link-wrapper {
-            text-decoration: none; /* Removes the default underline from links */
-            color: inherit;        /* Ensures text color stays as defined in your publication-item styles */
-            display: block;        /* Makes the link behave like a block element to cover the whole card area */
-            cursor: pointer;       /* Ensures the mouse turns into a hand icon */
+        .about-section::before, 
+        .skills-section::before, 
+        .projects-section::before, 
+        .publications-section::before,
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.3;
+            z-index: 0;
+            pointer-events: none;
+            animation: gridMove 20s linear infinite;
         }
 
-        /* This ensures the transition happens smoothly both ON and OFF hover */
-        .publication-item, .project-item {
-            /* Assuming you already have base styles for background and border here */
-            /* e.g., background: var(--bg-secondary); border: 1px solid var(--grid-color); */
-            transition: all 0.3s ease;
-        }
-
-        /* The actual hover effect matching your site style */
-        .card-link-wrapper:hover .publication-item, .project-item {
-            border-color: var(--accent-cyan); /* Change border to neon cyan */
-            transform: translateY(-5px); /* Move the card up slightly */
-            box-shadow: 0 5px 15px rgba(0, 217, 255, 0.1); /* Add a cyan glow effect */
+        .about-section .container, 
+        .skills-section .container, 
+        .projects-section .container, 
+        .publications-section .container,
+        .contact-section .container {
+            max-width: 1200px;
+            padding: 0 4rem;
+            position: relative;
+            z-index: 3;
+            animation: fadeInUp 1.2s ease-out;
+            margin: 0 auto;
         }
 
         .data-nodes {
@@ -592,49 +563,6 @@
             z-index: 2;
         }
 
-        /* Enhanced About, Projects, Publications Section Container */
-        .about-section .container, .projects-section .container, .publications-section .container  {
-            max-width: 1200px;
-            padding: 0 4rem;
-            position: relative;
-            z-index: 3;
-            animation: fadeInUp 1.2s ease-out;
-            margin: 0 auto;
-        }
-
-        /* Cyberpunk Grid Overlay for About, Projects, Publications Section */
-        .about-section::before, .projects-section::before, .publications-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.3;
-            z-index: 0;
-            pointer-events: none;
-            animation: gridMove 20s linear infinite;
-        }
-
-        .about-section .container {
-            max-width: 1200px;
-            padding: 0 4rem;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1.2s ease-out;
-            margin: 0 auto;
-        }
-
-        /* Ensure About section content doesn't overlap with other sections */
-        .about-section .about-content {
-            position: relative;
-            z-index: 2;
-        }
-
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
@@ -676,6 +604,9 @@
             }
         }
 
+        /* ========================================
+           ABOUT SECTION
+        ======================================== */
         .about-content {
             display: grid;
             grid-template-columns: 1fr;
@@ -697,12 +628,10 @@
             transition: all 0.3s ease;
         }
         
-        /* Force all text within about section to be white */
         .about-section * {
             color: #ffffff !important;
         }
         
-        /* Override any potential text color issues */
         .about-text * {
             color: #ffffff !important;
         }
@@ -740,136 +669,9 @@
             margin-bottom: 0;
         }
 
-        /* Interactive elements */
-        .highlight {
-            background: linear-gradient(120deg, var(--accent-cyan), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-            position: relative;
-            display: inline-block;
-        }
-
-        .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .highlight:hover::after {
-            opacity: 1;
-        }
-
-        /* Terminal-style typing effect for key phrases */
-        .typing-effect {
-            display: inline-block;
-            border-right: 2px solid var(--accent-cyan);
-            animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--accent-cyan); }
-        }
-
-        /* Skill badges */
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .skill-tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(0, 217, 255, 0.1);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--accent-cyan);
-            font-family: 'JetBrains Mono', monospace;
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: rgba(0, 217, 255, 0.2);
-            transform: translateY(-1px);
-            box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
-        }
-
-        /* Terminal Cursor Effect */
-        .cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1.2em;
-            background: var(--accent-cyan);
-            margin-left: 5px;
-            animation: blink 1s step-end infinite;
-            vertical-align: text-bottom;
-        }
-
-        @keyframes blink {
-            0%, 50% {
-                opacity: 1;
-            }
-            50.01%, 100% {
-                opacity: 0;
-            }
-        }
-
-        /* Skills Section */
-        .skills-section {
-            min-height: 100vh;
-            padding: 6rem 2rem;
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-        }
-
-        .skills-section .container {
-            max-width: 1200px;
-            padding: 0 4rem;
-            position: relative;
-            z-index: 3;
-            animation: fadeInUp 1.2s ease-out;
-            margin: 0 auto;
-        }
-
-        .skills-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.3;
-            z-index: 0;
-            pointer-events: none;
-            animation: gridMove 20s linear infinite;
-        }
-
+        /* ========================================
+           SKILLS SECTION
+        ======================================== */
         .skills-content {
             display: grid;
             grid-template-columns: 1fr;
@@ -954,25 +756,16 @@
             margin: 0;
         }
 
-        @media (max-width: 1024px) {
-            .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* ========================================
+           PROJECTS SECTION
+        ======================================== */
+        .card-link-wrapper {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            cursor: pointer;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .skills-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .skill-card {
-                padding: 1.5rem;
-            }
-        }
-
-               /* Projects Section Styles */
         .project-item {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(0, 217, 255, 0.1);
@@ -997,13 +790,13 @@
             transition: left 0.5s ease;
         }
 
-        .project-item:hover {
+        .card-link-wrapper:hover .project-item {
             border-color: rgba(0, 217, 255, 0.3);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(0, 217, 255, 0.1), 0 0 20px rgba(0, 217, 255, 0.2);
             transform: translateY(-5px);
         }
 
-        .project-item:hover::before {
+        .card-link-wrapper:hover .project-item::before {
             left: 0;
         }
 
@@ -1032,23 +825,6 @@
             display: inline-block;
         }
 
-        .project-link {
-            display: inline-block;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 0.3rem 1rem;
-            border: 1px solid var(--accent-cyan);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            margin-left: 0.5rem;
-        }
-
-        .project-link:hover {
-            background: rgba(0, 217, 255, 0.1);
-            box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
-        }
-
         .project-meta {
             display: flex;
             gap: 1rem;
@@ -1064,10 +840,6 @@
 
         .project-tech {
             color: var(--accent-cyan);
-        }
-
-        .project-description {
-            margin-bottom: 1rem;
         }
 
         .project-description ul {
@@ -1097,7 +869,9 @@
             font-weight: 700;
         }
 
-        /* Publications Section Styles */
+        /* ========================================
+           PUBLICATIONS SECTION
+        ======================================== */
         .publication-item {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(0, 217, 255, 0.1);
@@ -1122,13 +896,13 @@
             transition: left 0.5s ease;
         }
 
-        .publication-item:hover {
+        .card-link-wrapper:hover .publication-item {
             border-color: rgba(179, 102, 255, 0.3);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(179, 102, 255, 0.1), 0 0 20px rgba(179, 102, 255, 0.2);
             transform: translateY(-5px);
         }
 
-        .publication-item:hover::before {
+        .card-link-wrapper:hover .publication-item::before {
             left: 0;
         }
 
@@ -1142,23 +916,6 @@
             background-clip: text;
             margin-bottom: 1rem;
             display: inline-block;
-        }
-
-        .publication-link {
-            display: inline-block;
-            color: var(--accent-purple);
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 0.3rem 1rem;
-            border: 1px solid var(--accent-purple);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            margin-left: 0.5rem;
-        }
-
-        .publication-link:hover {
-            background: rgba(179, 102, 255, 0.1);
-            box-shadow: 0 0 15px rgba(179, 102, 255, 0.3);
         }
 
         .publication-description ul {
@@ -1187,6 +944,162 @@
             color: var(--accent-purple);
             font-weight: 700;
         }
+
+        /* ========================================
+           CONTACT SECTION
+        ======================================== */
+        .contact-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 1rem;
+            font-weight: 400;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 2.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transition: left 0.5s ease;
+        }
+
+        .contact-btn:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .contact-btn:hover::before {
+            left: 0;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+        ======================================== */
+        @media (max-width: 1024px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: rgba(18, 24, 38, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 5rem 2rem;
+                gap: 2rem;
+                border-left: 1px solid rgba(0, 217, 255, 0.2);
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-link {
+                font-size: 1.1rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .project-header {
+                flex-direction: column;
+            }
+
+            .project-title {
+                font-size: 1.2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .skill-card {
+                padding: 1.5rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+            }
+            
+            .contact-btn {
+                width: 100%;
+                max-width: 400px;
+                justify-content: center;
+            }
+
+            .about-section .container, 
+            .skills-section .container, 
+            .projects-section .container, 
+            .publications-section .container,
+            .contact-section .container {
+                padding: 0 2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1206,14 +1119,15 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="menu-toggle" id="menuToggle">
-                <span>
-                <span>
-                <span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>
 
-    <div class="container">
+    <!-- Hero Section -->
+    <div class="container" id="home">
         <div class="hero">
             <div class="label">Associate @ PwC</div>
             <h1>Anshuman Mohanty</h1>
@@ -1241,7 +1155,9 @@
             </div>
             <div class="about-content">
                 <div class="about-text" id="aboutText">
-                    <!-- Content will be loaded dynamically -->
+                    <p>I'm Anshuman Mohanty, a deeply curious Data Scientist with a Master's in Applied Data Science from USC. I specialize in transforming complex raw data into real-world solutions using Deep Learning, Generative AI, NLP, and forecasting.</p>
+                    <p>My approach balances advanced research with pragmatic application. I have authored two published papers and delivered measurable professional impact, including achieving 95% accuracy in Alzheimer's detection models and engineering reinforcement learning algorithms that increased ad CTR by 13%.</p>
+                    <p>With experience ranging from deep learning research to deploying scalable pipelines on AWS at organizations like Klickly and Dr. Reddy's, I am a collaborative problem-solver ready to build the next generation of AI-powered solutions.</p>
                 </div>
             </div>
         </div>
@@ -1313,6 +1229,7 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section id="projects" class="projects-section">
         <div class="projects-background">
             <div class="data-nodes" id="projectsDataNodes"></div>
@@ -1326,86 +1243,89 @@
             </div>
             <div class="projects-content">
                 <a href="https://github.com/AnshumanMohanty-2001/EchoFilter-AI-Powered-Personal-Audio-Firewall" class="card-link-wrapper" target="_blank">
-                <div class="project-item">
-                    <div class="project-header">
-                        <div class="project-title-wrapper">
-                            <h3 class="project-title">EchoFilter: AI-Powered Personal Audio Firewall</h3>                        </div>
-                        <div class="project-meta">
-                            <span class="project-tech">Python</span>
-                            <span class="project-date">Apr 2025 – May 2025</span>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">EchoFilter: AI-Powered Personal Audio Firewall</h3>
+                            </div>
+                            <div class="project-meta">
+                                <span class="project-tech">Python</span>
+                                <span class="project-date">Apr 2025 – May 2025</span>
+                            </div>
+                        </div>
+                        <div class="project-description">
+                            <ul>
+                                <li>Designed and implemented <strong>EchoFilter</strong>, a modular system that <strong>transcribes ambient audio</strong> using <strong>Faster-Whisper ASR</strong> and <strong>detects, explains, and redacts sensitive content</strong> (e.g., mental health, bullying) from transcripts.</li>
+                                <li>Developed NLP pipeline <strong>combining semantic and contextual understanding</strong> for category classification using <strong>MPNet Sentence Transformers</strong>, severity assessment via <strong>Flan-T5</strong>, and rationale generation using <strong>Phi-2</strong>; deployed system with <strong>Streamlit Cloud</strong>.</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="project-description">
-                        <ul>
-                            <li>Designed and implemented <strong>EchoFilter</strong>, a modular system that <strong>transcribes ambient audio</strong> using <strong>Faster-Whisper ASR</strong> and <strong>detects, explains, and redacts sensitive content</strong> (e.g., mental health, bullying) from transcripts.</li>
-                            <li>Developed NLP pipeline <strong>combining semantic and contextual understanding</strong> for category classification using <strong>MPNet Sentence Transformers</strong>, severity assessment via <strong>Flan-T5</strong>, and rationale generation using <strong>Phi-2</strong>; deployed system with <strong>Streamlit Cloud</strong>.</li>
-                        </ul>
-                    </div>
-                </div>
                 </a>
 
                 <a href="https://github.com/AnshumanMohanty-2001/Detect-AI-Text-using-LLMs" class="card-link-wrapper" target="_blank">
-                <div class="project-item">
-                    <div class="project-header">
-                        <div class="project-title-wrapper">
-                            <h3 class="project-title">Classifying Human vs. LLM-Generated Text Using Transformer Models</h3>                        </div>
-                        <div class="project-meta">
-                            <span class="project-tech">Python</span>
-                            <span class="project-date">Mar 2025 – Apr 2025</span>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Classifying Human vs. LLM-Generated Text Using Transformer Models</h3>
+                            </div>
+                            <div class="project-meta">
+                                <span class="project-tech">Python</span>
+                                <span class="project-date">Mar 2025 – Apr 2025</span>
+                            </div>
+                        </div>
+                        <div class="project-description">
+                            <ul>
+                                <li>Developed an advanced <strong>NLP preprocessing pipeline</strong> (processing <strong>missing data, unicode normalization, contraction expansion, stop word removal, lemmatization</strong>) for classifying <strong>30,000 essays</strong>.</li>
+                                <li>Engineered and evaluated multiple models, achieving a state-of-the-art accuracy of <strong>99.82%</strong> with <strong>DistilBERT</strong>, significantly outperforming traditional ML and other DL approaches.</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="project-description">
-                        <ul>
-                            <li>Developed an advanced <strong>NLP preprocessing pipeline</strong> (processing <strong>missing data, unicode normalization, contraction expansion, stop word removal, lemmatization</strong>) for classifying <strong>30,000 essays</strong>.</li>
-                            <li>Engineered and evaluated multiple models, achieving a state-of-the-art accuracy of <strong>99.82%</strong> with <strong>DistilBERT</strong>, significantly outperforming traditional ML and other DL approaches.</li>
-                        </ul>
-                    </div>
-                </div>
                 </a>
 
                 <a href="https://github.com/AnshumanMohanty-2001/Yelp-Recommender-System" class="card-link-wrapper" target="_blank">
-                <div class="project-item">
-                    <div class="project-header">
-                        <div class="project-title-wrapper">
-                            <h3 class="project-title">XGBoost-based Recommendation System for Yelp Reviews</h3>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">XGBoost-based Recommendation System for Yelp Reviews</h3>
+                            </div>
+                            <div class="project-meta">
+                                <span class="project-tech">Python</span>
+                                <span class="project-date">Aug 2024 – Dec 2024</span>
+                            </div>
                         </div>
-                        <div class="project-meta">
-                            <span class="project-tech">Python</span>
-                            <span class="project-date">Aug 2024 – Dec 2024</span>
+                        <div class="project-description">
+                            <ul>
+                                <li>Built a robust recommender system using <strong>XGBoost on PySpark</strong> for <strong>large dataset (450,000 records)</strong>, incorporating sophisticated feature engineering techniques.</li>
+                                <li>Optimized model performance via <strong>hyperparameter tuning (Optuna)</strong>, achieved <strong>test RMSE of 97.35</strong> and <strong>ranked 5th among 250 students</strong>.</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="project-description">
-                        <ul>
-                            <li>Built a robust recommender system using <strong>XGBoost on PySpark</strong> for <strong>large dataset (450,000 records)</strong>, incorporating sophisticated feature engineering techniques.</li>
-                            <li>Optimized model performance via <strong>hyperparameter tuning (Optuna)</strong>, achieved <strong>test RMSE of 97.35</strong> and <strong>ranked 5th among 250 students</strong>.</li>
-                        </ul>
-                    </div>
-                </div>
                 </a>
 
                 <a href="https://github.com/AnshumanMohanty-2001/Hotel-Reservation-Manager" class="card-link-wrapper" target="_blank">
-                <div class="project-item">
-                    <div class="project-header">
-                        <div class="project-title-wrapper">
-                            <h3 class="project-title">Leveraging Database Solutions for Hotel Management</h3>                        </div>
-                        <div class="project-meta">
-                            <span class="project-tech">Python, MongoDB</span>
-                            <span class="project-date">Jan 2024 – May 2024</span>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Leveraging Database Solutions for Hotel Management</h3>
+                            </div>
+                            <div class="project-meta">
+                                <span class="project-tech">Python, MongoDB</span>
+                                <span class="project-date">Jan 2024 – May 2024</span>
+                            </div>
+                        </div>
+                        <div class="project-description">
+                            <ul>
+                                <li>Developed a <strong>full-stack Flask web application</strong> to streamline <strong>hotel booking and management operations</strong>.</li>
+                                <li>Optimized database performance for <strong>80,000 records</strong> using <strong>hashing</strong> and ensured <strong>high availability</strong> through the implementation of <strong>3 replica sets in MongoDB</strong>.</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="project-description">
-                        <ul>
-                            <li>Developed a <strong>full-stack Flask web application</strong> to streamline <strong>hotel booking and management operations</strong>.</li>
-                            <li>Optimized database performance for <strong>80,000 records</strong> using <strong>hashing</strong> and ensured <strong>high availability</strong> through the implementation of <strong>3 replica sets in MongoDB</strong>.</li>
-                        </ul>
-                    </div>
-                </div>
-
                 </a>
             </div>
         </div>
     </section>
 
+    <!-- Publications Section -->
     <section id="publications" class="publications-section">
         <div class="publications-background">
             <div class="data-nodes" id="publicationsDataNodes"></div>
@@ -1429,16 +1349,45 @@
                         </div>
                     </div>
                 </a>
+
                 <a href="https://www.sciencedirect.com/science/article/abs/pii/S0045790622005754" class="card-link-wrapper" target="_blank">
-                <div class="publication-item">
-                    <h3 class="publication-title">A Hybrid Deep Learning Framework with CNN and Bi-directional LSTM for Store Item Demand Forecasting</h3>
-                    <div class="publication-description">
-                        <ul>
-                            <li>Devised <strong>CNN-BiLSTM</strong> framework for time series sales prediction across 50 products and 10 stores.</li>
-                            <li>Obtained <strong>Mean Absolute Error</strong> of <strong>6.7</strong>, <strong>R2 Score of 0.85</strong>, <strong>outperformed</strong> all existing research approaches.</li>
-                        </ul>
+                    <div class="publication-item">
+                        <h3 class="publication-title">A Hybrid Deep Learning Framework with CNN and Bi-directional LSTM for Store Item Demand Forecasting</h3>
+                        <div class="publication-description">
+                            <ul>
+                                <li>Devised <strong>CNN-BiLSTM</strong> framework for time series sales prediction across 50 products and 10 stores.</li>
+                                <li>Obtained <strong>Mean Absolute Error</strong> of <strong>6.7</strong>, <strong>R2 Score of 0.85</strong>, <strong>outperformed</strong> all existing research approaches.</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-background">
+            <div class="data-nodes" id="contactDataNodes"></div>
+            <div class="wave-pattern"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="section-header">
+                <div class="label">Contact</div>
+                <h2 class="section-title">Get In Touch</h2>
+                <!-- <p class="contact-subtitle">I'm currently open to full-time opportunities in Data Science and AI/ML</p> -->
+            </div>
+            
+            <div class="contact-links">
+                <a href="mailto:anshumohanty2002@gmail.com" class="contact-btn">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <span>anshumohanty2002@gmail.com</span>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/anshuman-mohanty-b21b04231/" class="contact-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin contact-icon"></i>
+                    <span>LinkedIn Profile</span>
                 </a>
             </div>
         </div>
@@ -1450,7 +1399,9 @@
     </div>
 
     <script>
-        // Create floating particles
+        /* ========================================
+           FLOATING PARTICLES
+        ======================================== */
         const particlesContainer = document.getElementById('particles');
         const particleCount = 30;
 
@@ -1461,14 +1412,15 @@
             particle.style.animationDelay = Math.random() * 8 + 's';
             particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
             
-            // Random color
             const colors = ['var(--accent-cyan)', 'var(--accent-purple)', 'var(--accent-pink)'];
             particle.style.background = colors[Math.floor(Math.random() * colors.length)];
             
             particlesContainer.appendChild(particle);
         }
 
-        // Mobile menu toggle
+        /* ========================================
+           MOBILE MENU TOGGLE
+        ======================================== */
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -1477,7 +1429,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
@@ -1485,7 +1436,9 @@
             });
         });
 
-        // Active link on scroll
+        /* ========================================
+           ACTIVE LINK ON SCROLL
+        ======================================== */
         const sections = document.querySelectorAll('section[id]');
         const navbar = document.querySelector('.navbar');
         
@@ -1507,21 +1460,21 @@
                 }
             });
 
-        // Change navbar background on scroll
-        if (scrollY > 50) {
-            // Scrolled down - make translucent
-            navbar.style.background = 'rgba(10, 14, 23, 0.85)';
-            navbar.style.backdropFilter = 'blur(2px)';
-            navbar.style.borderBottom = '1px solid rgba(0, 217, 255, 0.3)';
-        } else {
-            // At top - keep completely transparent
-            navbar.style.background = 'rgba(10, 14, 23, 0.0)';
-            navbar.style.backdropFilter = 'blur(2px)';
-            navbar.style.borderBottom = '1px solid rgba(0, 217, 255, 0.05)';
-        }
+            // Change navbar background on scroll
+            if (scrollY > 50) {
+                navbar.style.background = 'rgba(10, 14, 23, 0.85)';
+                navbar.style.backdropFilter = 'blur(2px)';
+                navbar.style.borderBottom = '1px solid rgba(0, 217, 255, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(10, 14, 23, 0.0)';
+                navbar.style.backdropFilter = 'blur(2px)';
+                navbar.style.borderBottom = '1px solid rgba(0, 217, 255, 0.05)';
+            }
         });
 
-        // Smooth scroll
+        /* ========================================
+           SMOOTH SCROLL
+        ======================================== */
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1535,10 +1488,11 @@
             });
         });
 
-        // Scroll to top functionality
+        /* ========================================
+           SCROLL INDICATOR
+        ======================================== */
         const scrollIndicator = document.querySelector('.scroll-indicator');
 
-        // Show/hide scroll indicator based on scroll position
         window.addEventListener('scroll', () => {
             if (scrollY > 300) {
                 scrollIndicator.classList.add('visible');
@@ -1547,7 +1501,6 @@
             }
         });
 
-        // Scroll to top when clicking the indicator
         scrollIndicator.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -1555,7 +1508,9 @@
             });
         });
 
-        // Add interactivity to buttons
+        /* ========================================
+           BUTTON RIPPLE EFFECTS
+        ======================================== */
         document.querySelectorAll('.btn').forEach(btn => {
             btn.addEventListener('mouseenter', function(e) {
                 const x = e.pageX - this.offsetLeft;
@@ -1579,8 +1534,22 @@
             });
         });
 
+        // Add ripple animation CSS
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    width: 300px;
+                    height: 300px;
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
 
-        // Create floating data points animation
+        /* ========================================
+           FLOATING DATA POINTS ANIMATION
+        ======================================== */
         function createFloatingDataPoints() {
             const container = document.createElement('div');
             container.id = 'dataPointsContainer';
@@ -1610,7 +1579,6 @@
                 
                 container.appendChild(point);
 
-                // Remove after animation
                 setTimeout(() => {
                     if (point.parentNode) {
                         point.parentNode.removeChild(point);
@@ -1618,7 +1586,6 @@
                 }, 15000);
             }
 
-            // Add CSS for floating animation
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes floatUp {
@@ -1640,16 +1607,16 @@
             `;
             document.head.appendChild(style);
 
-            // Create new data points periodically
             setInterval(createDataPoint, 500);
             
-            // Initial burst of data points
             for (let i = 0; i < 20; i++) {
                 setTimeout(createDataPoint, i * 100);
             }
         }
 
-        // Create data stream lines
+        /* ========================================
+           DATA STREAM LINES
+        ======================================== */
         function createDataStreamLines() {
             const container = document.createElement('div');
             container.id = 'dataStreamContainer';
@@ -1676,7 +1643,6 @@
                 
                 container.appendChild(stream);
 
-                // Remove after animation
                 setTimeout(() => {
                     if (stream.parentNode) {
                         stream.parentNode.removeChild(stream);
@@ -1684,7 +1650,6 @@
                 }, 5000);
             }
 
-            // Add CSS for stream animation
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes streamFlow {
@@ -1703,16 +1668,12 @@
             `;
             document.head.appendChild(style);
 
-            // Create new streams periodically
             setInterval(createDataStream, 1000);
         }
 
-        // Initialize all animations
-        createFloatingDataPoints();
-        createDataStreamLines();
-        createDataNetwork();
-
-        // Create Data Flow Network Animation
+        /* ========================================
+           DATA NETWORK CANVAS ANIMATION
+        ======================================== */
         function createDataNetwork() {
             const canvas = document.createElement('canvas');
             canvas.id = 'dataNetworkCanvas';
@@ -1728,7 +1689,6 @@
 
             const ctx = canvas.getContext('2d');
             
-            // Resize canvas to match window
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
@@ -1736,7 +1696,6 @@
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
 
-            // Network configuration
             const config = {
                 nodeCount: Math.floor((canvas.width * canvas.height) / 20000),
                 maxConnections: 3,
@@ -1746,7 +1705,6 @@
                 colors: ['#00d9ff', '#b366ff', '#ff3366']
             };
 
-            // Node class
             class Node {
                 constructor() {
                     this.x = Math.random() * canvas.width;
@@ -1758,15 +1716,12 @@
                 }
 
                 update() {
-                    // Move nodes
                     this.x += this.vx;
                     this.y += this.vy;
 
-                    // Bounce off walls
                     if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                     if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
 
-                    // Pulse animation
                     this.pulse += 0.05;
                 }
 
@@ -1783,13 +1738,11 @@
                 }
             }
 
-            // Create nodes
             const nodes = [];
             for (let i = 0; i < config.nodeCount; i++) {
                 nodes.push(new Node());
             }
 
-            // Mouse interaction
             const mouse = {
                 x: undefined,
                 y: undefined,
@@ -1806,25 +1759,20 @@
                 mouse.y = undefined;
             });
 
-            // Draw function
             function draw() {
-                // Clear canvas with trail effect
                 ctx.fillStyle = 'rgba(10, 14, 23, 0.1)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // Update and draw nodes
                 nodes.forEach(node => {
                     node.update();
                     node.draw();
 
-                    // Check connections to other nodes
                     nodes.forEach(otherNode => {
                         if (node === otherNode) return;
 
                         const distance = Math.hypot(node.x - otherNode.x, node.y - otherNode.y);
                         
                         if (distance < config.maxDistance) {
-                            // Draw connection line
                             ctx.beginPath();
                             ctx.strokeStyle = node.color;
                             ctx.lineWidth = config.lineWidth;
@@ -1834,7 +1782,6 @@
                             ctx.stroke();
                             ctx.globalAlpha = 1;
 
-                            // Add flow animation
                             if (Math.random() < 0.02) {
                                 const flowX = node.x + (otherNode.x - node.x) * Math.random();
                                 const flowY = node.y + (otherNode.y - node.y) * Math.random();
@@ -1847,17 +1794,14 @@
                         }
                     });
 
-                    // Mouse interaction
                     if (mouse.x && mouse.y) {
                         const distance = Math.hypot(node.x - mouse.x, node.y - mouse.y);
                         if (distance < mouse.radius) {
-                            // Repel nodes from mouse
                             const angle = Math.atan2(node.y - mouse.y, node.x - mouse.x);
                             const force = (mouse.radius - distance) / 10;
                             node.vx += Math.cos(angle) * force * 0.1;
                             node.vy += Math.sin(angle) * force * 0.1;
                             
-                            // Highlight nodes near mouse
                             ctx.beginPath();
                             ctx.arc(node.x, node.y, config.nodeSize + 2, 0, Math.PI * 2);
                             ctx.strokeStyle = '#ffffff';
@@ -1868,7 +1812,6 @@
                 });
             }
 
-            // Animation loop
             function animate() {
                 draw();
                 requestAnimationFrame(animate);
@@ -1877,83 +1820,38 @@
             animate();
         }
 
-        // Create dynamic data nodes for About section background
-        const dataNodesContainer = document.getElementById('dataNodes');
-        const nodeCount = 50;
-
-        for (let i = 0; i < nodeCount; i++) {
-            const node = document.createElement('div');
-            node.className = 'data-node';
-            node.style.left = Math.random() * 100 + '%';
-            node.style.top = Math.random() * 100 + '%';
-            node.style.animationDelay = Math.random() * 15 + 's';
-            node.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        /* ========================================
+           CREATE DATA NODES FOR SECTIONS
+        ======================================== */
+        function createDataNodes(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
             
-            // Random size variation
-            const size = Math.random() * 3 + 2;
-            node.style.width = size + 'px';
-            node.style.height = size + 'px';
-            
-            dataNodesContainer.appendChild(node);
-        }
-
-        // Load About Me content from text file
-        async function loadAboutContent() {
-            try {
-                const response = await fetch('files/about-me.txt');
-                if (!response.ok) {
-                    throw new Error('Failed to load about content');
-                }
-                const text = await response.text();
+            for (let i = 0; i < count; i++) {
+                const node = document.createElement('div');
+                node.className = 'data-node';
+                node.style.left = Math.random() * 100 + '%';
+                node.style.top = Math.random() * 100 + '%';
+                node.style.animationDelay = Math.random() * 15 + 's';
+                node.style.animationDuration = (Math.random() * 10 + 10) + 's';
                 
-                // Split text into paragraphs and create HTML
-                const paragraphs = text.split('\n\n').filter(p => p.trim());
-                const aboutTextContainer = document.getElementById('aboutText');
+                const size = Math.random() * 3 + 2;
+                node.style.width = size + 'px';
+                node.style.height = size + 'px';
                 
-                aboutTextContainer.innerHTML = paragraphs.map(paragraph => {
-                    // Add highlights for key terms
-                    const highlightedText = paragraph
-                        .replace(/Data Scientist/g, 'Data Scientist')
-                        .replace(/Deep Learning/g, 'Deep Learning')
-                        .replace(/Generative AI/g, 'Generative AI')
-                        .replace(/NLP/g, 'NLP')
-                        .replace(/forecasting/g, 'forecasting')
-                        .replace(/95% accuracy/g, '95% accuracy')
-                        .replace(/13%/g, '13%')
-                        .replace(/AWS/g, 'AWS')
-                        .replace(/AI-powered solutions/g, 'AI-powered solutions');
-                    
-                    return `<p>${highlightedText}</p>`;
-                }).join('');
-                
-            } catch (error) {
-                console.error('Error loading about content:', error);
-                // Fallback content
-                document.getElementById('aboutText').innerHTML = `
-                    <p>I'm Anshuman Mohanty, a deeply curious Data Scientist with a Master's in Applied Data Science from USC. I specialize in transforming complex raw data into real-world solutions using Deep Learning, Generative AI, NLP, and forecasting.</p>
-                    <p>My approach balances advanced research with pragmatic application. I have authored two published papers and delivered measurable professional impact, including achieving 95% accuracy in Alzheimer's detection models and engineering reinforcement learning algorithms that increased ad CTR by 13%.</p>
-                    <p>With experience ranging from deep learning research to deploying scalable pipelines on AWS at organizations like Klickly and Dr. Reddy's, I am a collaborative problem-solver ready to build the next generation of AI-powered solutions. I am currently seeking full-time opportunities in Data Science and AI/ML.</p>
-                `;
+                container.appendChild(node);
             }
         }
 
-        // Load content when page loads
-        window.addEventListener('DOMContentLoaded', loadAboutContent);
+        createDataNodes('dataNodes', 50);
+        createDataNodes('skillsDataNodes', 50);
+        createDataNodes('projectsDataNodes', 50);
+        createDataNodes('publicationsDataNodes', 50);
+        createDataNodes('contactDataNodes', 50);
 
-        // Add ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    width: 300px;
-                    height: 300px;
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Typewriter effect for tagline
+        /* ========================================
+           TYPEWRITER EFFECT FOR TAGLINE
+        ======================================== */
         const taglineText = document.getElementById('taglineText');
         const taglines = [
             'I turn complex data into actionable insights',
@@ -1981,49 +1879,30 @@
                 } else {
                     clearInterval(typeInterval);
                     
-                    // Pause before clearing for next sentence
                     setTimeout(() => {
-                        // Clear text with fade out effect
                         taglineText.style.opacity = '0';
                         
                         setTimeout(() => {
-                            // Move to next tagline
                             currentIndex = (currentIndex + 1) % taglines.length;
-                            
-                            // Reset and prepare for next typing
                             taglineText.style.opacity = '1';
                             isTyping = false;
-                            typeWriter(); // Start typing the next sentence
-                        }, 1000); // 1 second pause before next sentence
-                    }, 3000); // Display current sentence for 3 seconds
+                            typeWriter();
+                        }, 1000);
+                    }, 3000);
                 }
-            }, 100); // Type each character every 100ms
+            }, 100);
         }
 
-// Start typewriter effect after initial load
+        /* ========================================
+           INITIALIZE ALL ANIMATIONS
+        ======================================== */
+        createFloatingDataPoints();
+        createDataStreamLines();
+        createDataNetwork();
+
         setTimeout(() => {
             typeWriter();
-        }, 2000); // Wait 2 seconds before starting
-
-        // Initialize skills section animations
-        const skillsDataNodes = document.getElementById('skillsDataNodes');
-        const skillsNodeCount = 30;
-
-        for (let i = 0; i < skillsNodeCount; i++) {
-            const node = document.createElement('div');
-            node.className = 'data-node';
-            node.style.left = Math.random() * 100 + '%';
-            node.style.top = Math.random() * 100 + '%';
-            node.style.animationDelay = Math.random() * 15 + 's';
-            node.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            
-            // Random size variation
-            const size = Math.random() * 3 + 2;
-            node.style.width = size + 'px';
-            node.style.height = size + 'px';
-            
-            skillsDataNodes.appendChild(node);
-        }
+        }, 2000);
     </script>
 </body>
 </html>
